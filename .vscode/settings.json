@@ -1,0 +1,23 @@
+{
+    "cSpell.words": [
+        "codespaces",
+        "Doxygen",
+        "ETHARP",
+        "FSDATA",
+        "gpio",
+        "ifndef",
+        "LWIPOPTS",
+        "MEMP",
+        "multicore",
+        "NETCONN",
+        "NETIF",
+        "NUMFILES",
+        "POWERSAVE",
+        "QUEUELEN",
+        "VREF",
+        "Webserver"
+    ],
+    "files.associations": {
+        "template.h": "c"
+    }
+}
