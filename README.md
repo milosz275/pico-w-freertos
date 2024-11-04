@@ -1,16 +1,16 @@
 # Pico W Template
 
-[![CMake Build Workflow](https://github.com/milosz275/pico-w-template/actions/workflows/cmake.yml/badge.svg)](https://github.com/milosz275/pico-w-template/actions/workflows/cmake.yml)
-[![CodeQL with CMake Build](https://github.com/milosz275/pico-w-template/actions/workflows/codeql.yml/badge.svg)](https://github.com/milosz275/pico-w-template/actions/workflows/codeql.yml)
-[![Doxygen Pages](https://github.com/milosz275/pico-w-template/actions/workflows/doxygen-pages.yml/badge.svg)](https://github.com/milosz275/pico-w-template/actions/workflows/doxygen-pages.yml)
-[![License](https://img.shields.io/github/license/milosz275/pico-w-template)](/LICENSE)
+[![CMake Build Workflow](https://github.com/milosz275/pico-w-freertos/actions/workflows/cmake.yml/badge.svg)](https://github.com/milosz275/pico-w-freertos/actions/workflows/cmake.yml)
+[![CodeQL with CMake Build](https://github.com/milosz275/pico-w-freertos/actions/workflows/codeql.yml/badge.svg)](https://github.com/milosz275/pico-w-freertos/actions/workflows/codeql.yml)
+[![Doxygen Pages](https://github.com/milosz275/pico-w-freertos/actions/workflows/doxygen-pages.yml/badge.svg)](https://github.com/milosz275/pico-w-freertos/actions/workflows/doxygen-pages.yml)
+[![License](https://img.shields.io/github/license/milosz275/pico-w-freertos)](/LICENSE)
 
 ![logo](assets/logo.png)
 
 This is a template for a Pico W project. It includes a basic project structure and a simple example of a Pico W application in C using pico-sdk and pico-extras. Feel free to use it if CMake is is challenging for you or you just want to get started quickly.
 
-- [GitHub repository](https://github.com/milosz275/pico-w-template)
-- [Doxygen documentation](https://milosz275.github.io/pico-w-template/)
+- [GitHub repository](https://github.com/milosz275/pico-w-freertos)
+- [Doxygen documentation](https://milosz275.github.io/pico-w-freertos/)
 
 ## Table of Contents
 
@@ -23,7 +23,7 @@ This is a template for a Pico W project. It includes a basic project structure a
 
 ## Getting Started
 
-To use this template click "Use this template" and create a new repository or open the template in a codespaces [or use this template here](https://github.com/new?template_name=pico-w-template&template_owner=milosz275).
+To use this template click "Use this template" and create a new repository or open the template in a codespaces [or use this template here](https://github.com/new?template_name=pico-w-freertos&template_owner=milosz275).
 
 ![use template screen](assets/use-template.png)
 
@@ -47,7 +47,7 @@ sudo apt-get install cmake gcc-arm-none-eabi libnewlib-arm-none-eabi build-essen
 This project uses git submodules to include the Pico SDK and Pico Extras. To clone the repository with submodules use the following command:
 
 ```bash
-git clone --recurse-submodules https://github.com/milosz275/pico-w-template.git
+git clone --recurse-submodules https://github.com/milosz275/pico-w-freertos.git
 ```
 
 If you have already cloned the repository without submodules you can initialize them using the following commands:
@@ -101,4 +101,4 @@ This will produce `.uf2` file located in `build/src` directory. You can flash it
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE](https://github.com/milosz275/pico-w-template/blob/main/LICENSE) file for details.
+This project is licensed under the MIT License - see the [LICENSE](https://github.com/milosz275/pico-w-freertos/blob/main/LICENSE) file for details.
