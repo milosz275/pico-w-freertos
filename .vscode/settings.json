@@ -18,6 +18,8 @@
         "Webserver"
     ],
     "files.associations": {
-        "template.h": "c"
+        "template.h": "c",
+        "adc.h": "c",
+        "pico_freertos.h": "c"
     }
 }
