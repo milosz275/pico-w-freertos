@@ -2,6 +2,7 @@
 
 add_executable(${PROGRAM_NAME}
     main.c
+    pico_freertos.c
 )
 
 target_link_libraries(${PROGRAM_NAME}
@@ -10,6 +11,7 @@ target_link_libraries(${PROGRAM_NAME}
     pico_lwip_http
     pico_multicore
     hardware_adc
+    FreeRTOS-Kernel-Heap4
 )
 
 target_include_directories(${PROGRAM_NAME} PRIVATE
