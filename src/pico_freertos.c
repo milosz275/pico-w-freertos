@@ -9,11 +9,14 @@
 
 #include "FreeRTOS.h"
 #include "task.h"
+#include "queue.h"
 #include "lwipopts.h"
 #include "wifi_credentials.h"
 
 /* 12-bit conversion, assume max value == ADC_VREF == 3.3 V */
 const float conversion_factor = 3.3f / (1 << 12);
+
+static QueueHandle_t x_queue = NULL;
 
 float read_onboard_temperature(const char unit)
 {
@@ -30,7 +33,12 @@ float read_onboard_temperature(const char unit)
     return -1.0f;
 }
 
-void wifi_init_task()
+void init_queue()
+{
+    x_queue = xQueueCreate(1, sizeof(uint));
+}
+
+void wifi_init_task(void* pv_param)
 {
     printf("Connecting to WiFi...\n");
     cyw43_arch_wifi_connect_async(WIFI_SSID, WIFI_PASSWORD, CYW43_AUTH_WPA2_AES_PSK);
@@ -51,21 +59,37 @@ void wifi_init_task()
     printf("IP Address: %lu.%lu.%lu.%lu\n", ip_addr & 0xFF, (ip_addr >> 8) & 0xFF, (ip_addr >> 16) & 0xFF, ip_addr >> 24);
     
     while (true)
-        vTaskDelay(1000 / portTICK_PERIOD_MS);
+        vTaskDelay(5000 / portTICK_PERIOD_MS);
 }
 
-void blink_task()
+void blink_task(void* pv_param)
 {
     while (true)
     {
-        cyw43_arch_gpio_put(CYW43_WL_GPIO_LED_PIN, 1);
-        vTaskDelay(250 / portTICK_PERIOD_MS);
-        cyw43_arch_gpio_put(CYW43_WL_GPIO_LED_PIN, 0);
-        vTaskDelay(250 / portTICK_PERIOD_MS);
+        uint led_state = !cyw43_arch_gpio_get(CYW43_WL_GPIO_LED_PIN);
+        xQueueSend(x_queue, &led_state, 0U);
+        cyw43_arch_gpio_put(CYW43_WL_GPIO_LED_PIN, led_state);
+        vTaskDelay(1000 / portTICK_PERIOD_MS);
     }
 }
 
-void temperature_task()
+void usb_task(void* pv_param)
+{
+    uint received_value;
+    while (true)
+    {
+        BaseType_t result = xQueueReceive(x_queue, &received_value, portMAX_DELAY);
+        if (result == errQUEUE_EMPTY)
+            continue;
+        if (received_value)
+            printf("LED is on\n");
+        else
+            printf("LED is off\n");
+        vTaskDelay(100 / portTICK_PERIOD_MS);
+    }
+}
+
+void temperature_task(void* pv_param)
 {
     while (true)
     {
