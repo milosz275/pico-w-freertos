@@ -68,3 +68,8 @@ Doxyfile.bak
 
 # Generated files
 external/
+
+# Libs
+lib/pico-sdk/
+lib/pico-extras/
+lib/FreeRTOS-Kernel/
