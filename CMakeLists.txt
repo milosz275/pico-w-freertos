@@ -4,10 +4,10 @@ set(PROGRAM_NAME PicoWFreeRTOS)
 set(PICO_BOARD "pico_w")
 include(cmake/utils.cmake)
 
-include(pico-sdk/pico_sdk_init.cmake)
-include(pico-extras/pico_sdk_import.cmake)
+include(lib/pico-sdk/pico_sdk_init.cmake)
+include(lib/pico-extras/pico_sdk_import.cmake)
 
-set(FREERTOS_KERNEL_PATH ${CMAKE_CURRENT_LIST_DIR}/FreeRTOS-Kernel)
+set(FREERTOS_KERNEL_PATH ${CMAKE_CURRENT_LIST_DIR}/lib/FreeRTOS-Kernel)
 include(${FREERTOS_KERNEL_PATH}/portable/ThirdParty/GCC/RP2040/FreeRTOS_Kernel_import.cmake)
 
 project(${PROGRAM_NAME})
