@@ -20,6 +20,8 @@
     "files.associations": {
         "template.h": "c",
         "adc.h": "c",
-        "pico_freertos.h": "c"
+        "pico_freertos.h": "c",
+        "wifi_credentials.h": "c",
+        "multicore.h": "c"
     }
 }
