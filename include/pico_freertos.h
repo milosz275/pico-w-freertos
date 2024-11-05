@@ -12,10 +12,14 @@ typedef enum
 
 float read_onboard_temperature(const char unit);
 
-void wifi_init_task();
+void init_queue();
 
-void blink_task();
+void wifi_init_task(void* pv_param);
 
-void temperature_task();
+void blink_task(void* pv_param);
+
+void usb_task(void* pv_param);
+
+void temperature_task(void* pv_param);
 
 #endif // __TEMPLATE_H
