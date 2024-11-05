@@ -7,6 +7,7 @@
 
 #include "FreeRTOS.h"
 #include "task.h"
+#include "queue.h"
 #include "pico_freertos.h"
 #include "lwipopts.h"
 #include "wifi_credentials.h"
@@ -30,8 +31,10 @@ int main()
 
     // tasks
     sleep_ms(2000);
+    init_queue();
     xTaskCreate(wifi_init_task, "wifi_init_task", 1024, NULL, 1, NULL);
     xTaskCreate(blink_task, "blink_task", 1024, NULL, 1, NULL);
+    xTaskCreate(usb_task, "usb_task", 1024, NULL, 1, NULL);
     xTaskCreate(temperature_task, "temperature_task", 1024, NULL, 1, NULL);
     vTaskStartScheduler();
     while (true) {}
