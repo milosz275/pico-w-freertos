@@ -111,8 +111,8 @@ jobs:
         name: Build Main Project
         run: |
           mkdir build
+          cmake build -DCMAKE_BUILD_TYPE=${{ env.BUILD_TYPE }}
           cd build
-          cmake .. -DCMAKE_BUILD_TYPE=${{ env.BUILD_TYPE }}
           make -j$(nproc)
 
       - name: Perform CodeQL Analysis
