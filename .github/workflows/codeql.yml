@@ -61,14 +61,6 @@ jobs:
           echo "PICO_SDK_PATH=$(pwd)" >> $GITHUB_ENV
 
       - if: matrix.build-mode == 'manual'
-        name: Setup PICO Examples
-        run: |
-          echo "Setting up PICO Examples"
-          cd lib/pico-examples
-          git submodule update --init
-          echo "PICO_EXAMPLES_PATH=$(pwd)" >> $GITHUB_ENV
-
-      - if: matrix.build-mode == 'manual'
         name: Setup PICO Extras
         run: |
           echo "Setting up PICO Extras"
