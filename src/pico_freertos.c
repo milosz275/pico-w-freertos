@@ -10,6 +10,7 @@
 #include "FreeRTOS.h"
 #include "task.h"
 #include "queue.h"
+#include "semphr.h"
 #include "lwipopts.h"
 #include "wifi_credentials.h"
 
@@ -17,6 +18,8 @@
 const float conversion_factor = 3.3f / (1 << 12);
 
 static QueueHandle_t x_queue = NULL;
+SemaphoreHandle_t count = NULL;
+bool previous_led_state = false;
 
 float read_onboard_temperature(const char unit)
 {
@@ -33,9 +36,10 @@ float read_onboard_temperature(const char unit)
     return -1.0f;
 }
 
-void init_queue()
+void init()
 {
     x_queue = xQueueCreate(1, sizeof(uint));
+    count = xSemaphoreCreateCounting(5, 0);
 }
 
 void wifi_init_task(void* pv_param)
@@ -60,6 +64,48 @@ void wifi_init_task(void* pv_param)
     
     while (true)
         vTaskDelay(5000 / portTICK_PERIOD_MS);
+}
+
+void led_task(void* pv_param)
+{
+    gpio_init(LED_PIN);
+    gpio_set_dir(LED_PIN, GPIO_OUT);
+    while (true)
+    {
+        if (xSemaphoreTake(count, (TickType_t) 10) == pdTRUE)
+        {
+            if (!previous_led_state)
+                printf("Turning LED on\n");
+            previous_led_state = true;
+            gpio_put(LED_PIN, 1);
+            vTaskDelay(100 / portTICK_PERIOD_MS);
+        }
+        else
+        {
+            if (previous_led_state)
+                printf("Turning LED off\n");
+            previous_led_state = false;
+            gpio_put(LED_PIN, 0);
+            vTaskDelay(1 / portTICK_PERIOD_MS);
+        }
+    }
+}
+
+void button_task(void* pv_param)
+{
+    gpio_init(LED_TOGGLE_PIN);
+    gpio_set_dir(LED_TOGGLE_PIN, GPIO_IN);
+    gpio_pull_up(LED_TOGGLE_PIN);
+    while (true)
+    {
+        if (!gpio_get(LED_TOGGLE_PIN))
+        {
+            xSemaphoreGive(count);
+            vTaskDelay(20 / portTICK_PERIOD_MS);
+        }
+        else
+            vTaskDelay(1 / portTICK_PERIOD_MS);
+    }
 }
 
 void blink_task(void* pv_param)

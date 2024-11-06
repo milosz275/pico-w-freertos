@@ -31,11 +31,13 @@ int main()
 
     // tasks
     sleep_ms(2000);
-    init_queue();
-    xTaskCreate(wifi_init_task, "wifi_init_task", 1024, NULL, 1, NULL);
-    xTaskCreate(blink_task, "blink_task", 1024, NULL, 1, NULL);
-    xTaskCreate(usb_task, "usb_task", 1024, NULL, 1, NULL);
-    xTaskCreate(temperature_task, "temperature_task", 1024, NULL, 1, NULL);
+    init();
+    xTaskCreate(wifi_init_task, "wifi_init_task", 256, NULL, 1, NULL);
+    xTaskCreate(button_task, "button_task", 256, NULL, 1, NULL);
+    xTaskCreate(led_task, "led_task", 256, NULL, 1, NULL);
+    xTaskCreate(blink_task, "blink_task", 256, NULL, 1, NULL);
+    // xTaskCreate(usb_task, "usb_task", 256, NULL, 1, NULL);
+    // xTaskCreate(temperature_task, "temperature_task", 256, NULL, 1, NULL);
     vTaskStartScheduler();
     while (true) {}
 }
