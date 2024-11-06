@@ -111,7 +111,7 @@ jobs:
         name: Build Main Project
         run: |
           mkdir build
-          cmake build -DCMAKE_BUILD_TYPE=${{ env.BUILD_TYPE }}
+          cmake . -Bbuild -DCMAKE_BUILD_TYPE=${{ env.BUILD_TYPE }}
           cd build
           make -j$(nproc)
 
