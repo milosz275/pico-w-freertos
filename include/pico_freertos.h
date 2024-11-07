@@ -1,5 +1,5 @@
-#ifndef __TEMPLATE_H
-#define __TEMPLATE_H
+#ifndef __PICO_FREERTOS_H
+#define __PICO_FREERTOS_H
 
 #define TEMPERATURE_UNITS 'C'
 #define LED_PIN 14
@@ -14,7 +14,7 @@ typedef enum
 
 float read_onboard_temperature(const char unit);
 
-void init();
+void init_freertos();
 
 void wifi_init_task(void* pv_param);
 
@@ -28,4 +28,4 @@ void usb_task(void* pv_param);
 
 void temperature_task(void* pv_param);
 
-#endif // __TEMPLATE_H
+#endif // __PICO_FREERTOS_H

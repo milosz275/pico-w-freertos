@@ -1,8 +1,7 @@
-
-
 add_executable(${PROGRAM_NAME}
     main.c
     pico_freertos.c
+    pico_smp.c
 )
 
 target_link_libraries(${PROGRAM_NAME}

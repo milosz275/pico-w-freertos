@@ -17,8 +17,13 @@
 /* 12-bit conversion, assume max value == ADC_VREF == 3.3 V */
 const float conversion_factor = 3.3f / (1 << 12);
 
+/* On-board LED state queue */
 static QueueHandle_t x_queue = NULL;
+
+/* Semaphore for LED task */
 SemaphoreHandle_t count = NULL;
+
+/* Previous LED state */
 bool previous_led_state = false;
 
 float read_onboard_temperature(const char unit)
@@ -36,7 +41,7 @@ float read_onboard_temperature(const char unit)
     return -1.0f;
 }
 
-void init()
+void init_freertos()
 {
     x_queue = xQueueCreate(1, sizeof(uint));
     count = xSemaphoreCreateCounting(5, 0);
