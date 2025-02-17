@@ -45,6 +45,14 @@ add_compile_options(
     -Werror
 )
 
+set_source_files_properties(
+    ${FREERTOS_KERNEL_PATH}/tasks.c
+    ${FREERTOS_KERNEL_PATH}/queue.c
+    ${FREERTOS_KERNEL_PATH}/stream_buffer.c
+    ${FREERTOS_KERNEL_PATH}/timers.c
+    PROPERTIES COMPILE_FLAGS -Wno-error
+)
+
 pico_sdk_init()
 
 add_subdirectory(src)
