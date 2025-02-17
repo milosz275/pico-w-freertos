@@ -25,5 +25,12 @@
         "wifi_credentials.h": "c",
         "multicore.h": "c",
         "lwipopts.h": "c"
+    },
+    "workbench.colorCustomizations": {
+        "editorCursor.foreground": "#d4d4d4",
+        "activityBarBadge.background": "#007acc",
+        "activityBarBadge.foreground": "#ffffff",
+        "statusBar.background": "#252526",
+        "statusBar.foreground": "#d4d4d4"
     }
 }
